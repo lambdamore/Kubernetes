@@ -1,13 +1,12 @@
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: baoxiang
   namespace: chrs
 spec:
   storageClassName: manual
-  capacity:
-    storage: 40Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"
+  resources:
+    requests:
+      storage: 20Gi
