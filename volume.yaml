@@ -2,8 +2,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: baoxiang
-  labels:
-    type: local
+  namespace: chrs
 spec:
   storageClassName: manual
   capacity:
@@ -12,3 +11,4 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/mnt/data"
+
