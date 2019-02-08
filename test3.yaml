@@ -5,9 +5,15 @@ metadata:
   namespace: chrs
 spec:
   containers:
-  - name: vol-container
-    image: ubuntu
-    args: ["sleep", "36500000"]
+  - name: gpu-container
+    image: gitlab-registry.nautilus.optiputer.net/prp/jupyterlab:latest
+    args: ["sleep", "infinity"]
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+        memory: "10Gi"
+      requests:
+        memory: "10Gi"
     volumeMounts:
     - mountPath: /volume
       name: volume
@@ -16,3 +22,4 @@ spec:
     - name: volume
       persistentVolumeClaim:
         claimName: volume
+  
