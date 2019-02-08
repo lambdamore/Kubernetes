@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: volume
+spec:
+  storageClassName: rook-block
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vol-pod
+spec:
+  containers:
+  - name: vol-container
+    image: ubuntu
+    args: ["sleep", "36500000"]
+    volumeMounts:
+    - mountPath: /volume
+      name: volume
+  restartPolicy: Never
+  volumes:
+    - name: volume
+      persistentVolumeClaim:
+        claimName: volume
