@@ -13,8 +13,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: testVolome
-  namespace: chrs
+  name: vol-pod
 spec:
   containers:
   - name: vol-container
