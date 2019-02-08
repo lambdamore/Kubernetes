@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: baoxiang-volume
+spec:
+  storageClassName: rook-block
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testVolome
+  namespace: chrs
+spec:
+  containers:
+  - name: vol-container
+    image: ubuntu
+    args: ["sleep", "36500000"]
+    volumeMounts:
+    - mountPath: /baoxiang-volume
+      name: baoxiang-volume
+  restartPolicy: Never
+  volumes:
+    - name: baoxiang-volume 
+      persistentVolumeClaim:
+        claimName: baoxiang-volume
