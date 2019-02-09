@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: vol-pod
+  name: baoxiang
   namespace: chrs
 spec:
   containers:
