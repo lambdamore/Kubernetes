@@ -10,16 +10,24 @@ spec:
     requests:
       storage: 100Gi
 ---
+
 apiVersion: v1
 kind: Pod
 metadata:
-  name: vol-pod
+  name: baoxiang
+  namespace: chrs
 spec:
   containers:
-  - name: vol-container
-    image: ubuntu
-    args: ["sleep", "36500000"]
-    volumeMounts:
+  - name: gpu-container
+    image: gitlab-registry.nautilus.optiputer.net/prp/jupyterlab:latest
+    args: ["sleep", "infinity"]
+    resources:
+      limits:
+        nvidia.com/gpu: 2
+        memory: "20Gi"
+      requests:
+        memory: "20Gi"
+        volumeMounts:
     - mountPath: /volume
       name: volume
   restartPolicy: Never
@@ -27,3 +35,4 @@ spec:
     - name: volume
       persistentVolumeClaim:
         claimName: volume
+    
